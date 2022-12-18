@@ -1,0 +1,17 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./*.js"]
+}

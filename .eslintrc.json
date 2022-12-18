@@ -1,0 +1,44 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "es6": true
+  },
+  "plugins": ["@typescript-eslint", "functional"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:functional/external-recommended",
+    "plugin:functional/recommended",
+    "plugin:functional/stylistic",
+    "plugin:import/recommended"
+  ],
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "pathGroups": [
+          {
+            "pattern": "~/**",
+            "group": "external"
+          }
+        ],
+        "newlines-between": "always"
+      }
+    ],
+    "import/namespace": 0,
+    "import/named": 0,
+    "@typescript-eslint/prefer-readonly-parameter-types": [0],
+    "functional/functional-parameters": 0
+  }
+}
