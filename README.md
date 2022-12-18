@@ -1,5 +1,10 @@
 # simple-api
 
+## Install/Start
+
+- `npm i`
+- `npm run start`
+
 API Pass Through Application
 
 There's clear room for improvement on this, but due to the fact that we're using a JSON format to build our relations, the best way would be to build something like a balanced-tree so you could easily check with object destructuring.
