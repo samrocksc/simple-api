@@ -4,6 +4,8 @@
 
 - `npm i`
 - `npm run start`
+- `curl localhost:3000/users-transactions/1`
+- `curl localhost:3000/users-relations/2`
 
 API Pass Through Application
 
