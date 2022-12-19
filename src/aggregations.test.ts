@@ -41,6 +41,17 @@ describe('mapTransactionTimeline', () => {
     const result = mapTransactionTimeline(transactionsForId);
     expect(result.timeline).toHaveLength(2);
   });
+
+  it('should show status "SETTLED" before "PENDING" in the timeline', () => {
+    const customerTransactions = extractTransactionsByCustomerId(1, sample);
+    const uniqueTransactions = mapUniqueTransactions(customerTransactions);
+    const transactionsForId = extractTransactionsByTransactionId(
+      uniqueTransactions[0],
+      customerTransactions
+    );
+    const result = mapTransactionTimeline(transactionsForId);
+    expect(result.timeline[0].status).toBe('SETTLED');
+  });
 });
 
 describe('mapUsersTransactions', () => {

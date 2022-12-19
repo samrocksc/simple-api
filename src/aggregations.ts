@@ -48,32 +48,35 @@ export type TransactionTimelineItem = {
 
 export type EnrichedTransaction = Transaction & {
   timeline: TransactionTimelineItem[];
+  updatedAt: Date;
 };
 
 /**
  * maps over customer transactions and generates timeline
  */
 export const mapTransactionTimeline = (transactions: Transaction[]) => {
-  return transactions.reduce(
-    (acc: EnrichedTransaction, cur) => {
-      const data = {
-        ...acc,
-        timeline: [
-          ...acc.timeline,
-          {
-            status: cur.transactionStatus,
-            createdAt: new Date(cur.transactionDate),
-            amount: cur.amount,
-          },
-        ],
-      };
-      return data;
-    },
-    {
-      ...transactions[0],
-      timeline: [],
-    }
+  const timeline = transactions.reduce(
+    (acc: TransactionTimelineItem[], cur) => [
+      ...acc,
+      {
+        status: cur.transactionStatus,
+        createdAt: new Date(cur.transactionDate),
+        amount: cur.amount,
+      },
+    ],
+    []
   );
+
+  const sortedTimeline = timeline.sort((a, b) =>
+    a.createdAt.toString().localeCompare(b.createdAt.toString())
+  );
+
+  return {
+    ...transactions[0],
+    createdAt: transactions[0].transactionDate,
+    updatedAt: timeline[0].createdAt,
+    timeline: sortedTimeline,
+  };
 };
 
 /**
