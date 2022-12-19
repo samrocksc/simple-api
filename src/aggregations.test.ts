@@ -6,7 +6,7 @@ import {
   mapTransactionTimeline,
   mapUniqueTransactions,
   mapUsersTransactions,
-} from './aggregateById';
+} from './aggregations';
 
 describe('extractTransactionsByCustomerId', () => {
   it('should return array of results for only the customerId Supplied', () => {

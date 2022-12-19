@@ -1,7 +1,8 @@
 import Koa from 'koa';
 import Router from '@koa/router';
+
 import { fetchData } from './fetchData';
-import { mapRelatedTransactions, mapUsersTransactions } from './aggregateById';
+import { mapRelatedTransactions, mapUsersTransactions } from './aggregations';
 
 export const main = () => {
   const app = new Koa();

@@ -6,7 +6,7 @@
   "env": {
     "es6": true
   },
-  "plugins": ["@typescript-eslint", "functional"],
+  "plugins": ["@typescript-eslint"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -18,9 +18,6 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:functional/external-recommended",
-    "plugin:functional/recommended",
-    "plugin:functional/stylistic",
     "plugin:import/recommended"
   ],
   "rules": {
@@ -38,7 +35,6 @@
     ],
     "import/namespace": 0,
     "import/named": 0,
-    "@typescript-eslint/prefer-readonly-parameter-types": [0],
-    "functional/functional-parameters": 0
+    "@typescript-eslint/prefer-readonly-parameter-types": [0]
   }
 }

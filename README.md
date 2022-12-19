@@ -19,7 +19,7 @@ Alternatively, you could build a caching layer with Elastic or something of that
 ## Steps I Took In Development
 
 1. I inited the project with basic typescript and my preference of ESLint rules that help with readonly typing and prevent mutability.
-2. I firt hit the sample endpoint, and copied and pasted the JSON response into https://quicktype.io and generated Typescript types.  I also converted these into readonly types instead of interfaces to create a rock solid typing base to extend from.
+2. I first hit the sample endpoint, and copied and pasted the JSON response into https://quicktype.io and generated Typescript types.  I also converted these into readonly types instead of interfaces to create a rock solid typing base to extend from.
 3. I created `aggregateById.test.ts` first in order to put in the test requirements for the application
 4. I installed Jest, as it's the most commonly used library for almost every company I've worked with in the past 5 years.
 5. I created a simple fetch request to retrieve the data from the api endpoint and checked it against types to make sure all's good!

@@ -43,7 +43,7 @@ export const mapUniqueTransactions = (transactions: Transaction[]) => [
 export type TransactionTimelineItem = {
   readonly createdAt: Date;
   readonly status: TransactionStatus;
-  readonly amount: Number;
+  readonly amount: number;
 };
 
 export type EnrichedTransaction = Transaction & {
