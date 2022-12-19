@@ -11,7 +11,7 @@ There's clear room for improvement on this, but due to the fact that we're using
 
 I opted for a bit of a more functional approach(most functions can easily b e curried, or encapsulate eachother).  Primarily I wanted to show a solid understanding of testing, types, and understanding of neeeds.
 
-I think it would be easier to build junction tables(you could even do it with noSQL), and then hydrate junction tables as transactions accrue so you could easily build modeling from meta data of an event than direct data consumption.
+I think it would be easier to build junction tables(you could even do it with noSQL), and then hydrate junction tables as transactions accrue so you could easily build modeling from meta data of an event than direct data comparison of the entire object.
 
 Alternatively, you could build a caching layer with Elastic or something of that nature on top of this to help identify these events if time was less of a factor
 
