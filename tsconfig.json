@@ -13,5 +13,5 @@
     "declarationMap": true
   },
   "include": ["./src/**/*.ts"],
-  "exclude": ["./*.js"]
+  "exclude": ["./*.js", "./dist", "jest.config.js"]
 }

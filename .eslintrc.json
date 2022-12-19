@@ -4,9 +4,10 @@
     "project": "./tsconfig.json"
   },
   "env": {
-    "es6": true
+    "es6": true,
+    "jest": true
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "jest"],
   "settings": {
     "import/resolver": {
       "node": {
