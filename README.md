@@ -35,3 +35,6 @@ Alternatively, you could build a caching layer with Elastic or something of that
 - I tried to follow the philosophy of "Do one thing and do it well" which resulted in using extremely specific mapping functions, instead of the DRY philosophy, being able to test every section was important there.
 - I started kind of running out of time, so I declined on turning `deviceRelation` and `transactionRelation` into their own functions.
 
+## Fraud identifications
+
+I did notice that the deviceId `F210200` had multiple customerId's utilizing it which I do believe indicates there may ahve been fraud

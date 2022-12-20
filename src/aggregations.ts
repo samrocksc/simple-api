@@ -80,6 +80,17 @@ export const mapTransactionTimeline = (transactions: Transaction[]) => {
 };
 
 /**
+ * A typesafe way to dedup an array based off of an key
+ */
+export const dedupByKey = <D>(key: keyof D, data: D[]) =>
+  data.reduce((uniques, cur) => {
+    if (!uniques.some((item) => item[key] === cur[key])) {
+      return [...uniques, cur];
+    }
+    return uniques;
+  }, [] as typeof data);
+
+/**
  * Combines each transaction ID into an array with its statuses and amounts
  */
 export const mapUsersTransactions = (
@@ -97,7 +108,9 @@ export const mapUsersTransactions = (
   const enrichedTimelines = mappedTimelines.map((timeline) =>
     mapTransactionTimeline(timeline)
   );
-  return enrichedTimelines;
+
+  const uniqueTimelines = dedupByKey('authorizationCode', enrichedTimelines);
+  return uniqueTimelines;
 };
 
 /**
@@ -116,14 +129,15 @@ export const mapRelatedTransactions = (
     .flatMap((transaction) => {
       const { metadata, transactionType } = transaction;
 
-      const deviceRelation = !metadata.relatedTransactionId &&
-        metadata.deviceId && {
-          relationType: 'DEVICE',
-          relatedCustomerId: extractTransactionsByDeviceId(
-            metadata.deviceId,
-            transactions
-          )[0].customerId,
-        };
+      const deviceRelations =
+        (metadata.deviceId &&
+          extractTransactionsByDeviceId(metadata.deviceId, transactions).map(
+            (transaction) => ({
+              relationType: 'DEVICE',
+              relatedCustomerId: transaction.customerId,
+            })
+          )) ||
+        [];
 
       const transactionRelation = metadata.relatedTransactionId &&
         relatableStatuses.includes(transaction.transactionType) && {
@@ -134,7 +148,7 @@ export const mapRelatedTransactions = (
           )[0].customerId,
         };
 
-      return [deviceRelation, transactionRelation];
+      return [...deviceRelations, transactionRelation];
     })
     .filter(Boolean);
 

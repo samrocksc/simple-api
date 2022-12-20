@@ -1,5 +1,6 @@
 import { sample } from './sample.data';
 import {
+  dedupByKey,
   extractTransactionsByCustomerId,
   extractTransactionsByTransactionId,
   mapRelatedTransactions,
@@ -54,12 +55,39 @@ describe('mapTransactionTimeline', () => {
   });
 });
 
+describe('dedupByKey', () => {
+  const dataSet = [
+    { id: 1, reason: 'duplicated' },
+    { id: 2, reason: 'duplicated' },
+    { id: 3, reason: 'significant' },
+  ];
+
+  it('should return a length of two', () => {
+    const result = dedupByKey('reason', dataSet);
+    expect(result).toHaveLength(2);
+  });
+
+  it('should return length of two if each reason is different', () => {
+    const result = dedupByKey(
+      'reason',
+      dataSet.filter((datum) => datum.id !== 1)
+    );
+    expect(result).toHaveLength(2);
+  });
+});
+
 describe('mapUsersTransactions', () => {
   it('should properly map a users transactions', () => {
     const result = mapUsersTransactions(1, sample);
-    expect(result).toHaveLength(8);
+    expect(result).toHaveLength(4);
     expect(result[0].timeline).toHaveLength(2);
-    expect(result[1].timeline).toHaveLength(1);
+    expect(result[1].timeline).toHaveLength(2);
+  });
+
+  it.only('should only return unique authorization codes', () => {
+    const result = mapUsersTransactions(3, sample);
+    expect(result).toHaveLength(3);
+    expect(result[0].authorizationCode).not.toBe(result[1].authorizationCode);
   });
 });
 
@@ -73,6 +101,6 @@ describe('mapUsersRelations', () => {
   it('should return an array if relations are found', () => {
     const userOneTransactions = mapUsersTransactions(5, sample);
     const relations = mapRelatedTransactions(userOneTransactions, sample);
-    expect(relations).toHaveLength(3);
+    expect(relations).toHaveLength(7);
   });
 });
